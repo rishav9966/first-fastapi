@@ -1,0 +1,66 @@
+http://127.0.0.1:8000/openapi.json
+http://127.0.0.1:8000/redoc#operation/root__get
+http://127.0.0.1:8000/docs
+
+
+First Step:
+-------------------------------
+Import FastAPI.
+Create an app instance.
+Write a path operation decorator (like @app.get("/")).
+Write a path operation function (like def root(): ... above).
+Run the development server (like uvicorn main:app --reload).
+=========================================================================================================================================
+Path Parameters:
+--------------------------------
+Order of defining endpoints matter
+    for example
+    @app.get('users/me')
+    should be defined before
+    @app.get('users/{user_id}')
+
+Create Enum
+--------------------------------
+    if we want the parameter values to be predefined we can create an enum
+
+Path Convertor
+--------------------------------
+    Using an option directly from Starlette we can declare a path param containing a path using a URL like
+        /files/{file_path:path}
+    @app.get("/files/{file_path:path}")
+        async def read_file(file_path: str):
+        return {"file_path": file_path}
+    The URL would be: /files//home/johndoe/myfile.txt, with a double slash (//) between files and home.
+=========================================================================================================================================
+Query Parameters:
+--------------------------------
+    if query parameter not given any default value then that parameter is mandatory to pass otherwise it'll lead to an error "type": "value_error.missing"
+
+    You could also use Enums the same way as with Path Parameters
+=========================================================================================================================================
+Request Body
+-------------------------------
+To send data below should be used
+    POST    (Most Common)
+    PUT     
+    DELETE
+    PATCH
+
+Import Pydantic's BaseModel to validate the member variables
+Create DataModel
+    Create new class
+    Inherit BaseModel from pydantic
+
+FastAPI reads the request body as JSON
+Validate data and throw an error if there any with exactly wehere and what's the error
+
+You can declare path parameters and request body at the same time.
+    @aap.put('/items/{item_id}')
+
+=========================================================================================================================================
+Query Parameters and String Validations
+---------------------------------------
+
+
+
+=========================================================================================================================================
